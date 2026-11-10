@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bhupinder Singh</title>
+<meta name="description" content="AI Engineer specializing in RAG systems, Knowledge Graphs, LLM integration, agentic AI, and legacy system modernization. Edmonton, Alberta.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Figtree:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* =========================================
+   DESIGN TOKENS
+   ========================================= */
+:root {
+  --bg:           #F5F7FA;
+  --bg-2:         #EAECF1;
+  --surface:      #FFFFFF;
+  --surface-2:    #EEF1F6;
+  --text:         #111827;
+  --text-2:       #4B5668;
+  --text-3:       #8A95A3;
+  --accent:       #0D7377;
+  --accent-h:     #0A5D61;
+  --accent-bg:    rgba(13,115,119,0.08);
+  --accent-bd:    rgba(13,115,119,0.25);
+  --accent-glow:  rgba(13,115,119,0.18);
+  --accent-2:     #D97220;
+  --accent-2-bg:  rgba(217,114,32,0.08);
+  --border:       #DDE1E9;
+  --border-2:     #C8CDD7;
+  --nav-bg:       rgba(245,247,250,0.9);
+  --sh-sm:        0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+  --sh-md:        0 4px 16px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.04);
+  --sh-lg:        0 8px 32px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.05);
+  --r:            10px;
+  --r-sm:         6px;
+  --r-lg:         16px;
+  --r-pill:       999px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:           #09111C;
+    --bg-2:         #0D1726;
+    --surface:      #101E30;
+    --surface-2:    #152538;
+    --text:         #E8EDF5;
+    --text-2:       #8FA3BE;
+    --text-3:       #4F6880;
+    --accent:       #18BABA;
+    --accent-h:     #22CECE;
+    --accent-bg:    rgba(24,186,186,0.1);
+    --accent-bd:    rgba(24,186,186,0.28);
+    --accent-glow:  rgba(24,186,186,0.2);
+    --accent-2:     #F5A040;
+    --accent-2-bg:  rgba(245,160,64,0.1);
+    --border:       #1C2E44;
+    --border-2:     #263D58;
+    --nav-bg:       rgba(9,17,28,0.9);
+    --sh-sm:        0 1px 3px rgba(0,0,0,0.3),0 1px 2px rgba(0,0,0,0.2);
+    --sh-md:        0 4px 16px rgba(0,0,0,0.3),0 2px 4px rgba(0,0,0,0.18);
+    --sh-lg:        0 8px 32px rgba(0,0,0,0.4),0 4px 8px rgba(0,0,0,0.25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg:           #09111C;
+  --bg-2:         #0D1726;
+  --surface:      #101E30;
+  --surface-2:    #152538;
+  --text:         #E8EDF5;
+  --text-2:       #8FA3BE;
+  --text-3:       #4F6880;
+  --accent:       #18BABA;
+  --accent-h:     #22CECE;
+  --accent-bg:    rgba(24,186,186,0.1);
+  --accent-bd:    rgba(24,186,186,0.28);
+  --accent-glow:  rgba(24,186,186,0.2);
+  --accent-2:     #F5A040;
+  --accent-2-bg:  rgba(245,160,64,0.1);
+  --border:       #1C2E44;
+  --border-2:     #263D58;
+  --nav-bg:       rgba(9,17,28,0.9);
+  --sh-sm:        0 1px 3px rgba(0,0,0,0.3),0 1px 2px rgba(0,0,0,0.2);
+  --sh-md:        0 4px 16px rgba(0,0,0,0.3),0 2px 4px rgba(0,0,0,0.18);
+  --sh-lg:        0 8px 32px rgba(0,0,0,0.4),0 4px 8px rgba(0,0,0,0.25);
+  color-scheme: dark;
+}
+
+/* =========================================
+   RESET & BASE
+   ========================================= */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Figtree',system-ui,-apple-system,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.15;text-wrap:balance;margin:0}
+p{margin:0}
+a{color:var(--accent);text-decoration:none}
+a:hover{color:var(--accent-h)}
+img{max-width:100%;display:block}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;transition-duration:0.01ms!important}
+  html{scroll-behavior:auto}
+}
+
+/* =========================================
+   LAYOUT
+   ========================================= */
+.container{max-width:1100px;margin:0 auto;padding-inline:24px}
+section{padding-block:96px}
+
+.section-eyebrow{
+  font-family:'Space Grotesk',sans-serif;
+  font-size:.75rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.12em;
+  color:var(--accent);margin-bottom:10px;
+}
+.section-h{
+  font-size:clamp(1.75rem,4vw,2.5rem);
+  font-weight:700;color:var(--text);margin-bottom:14px;
+}
+.section-sub{
+  font-size:1.0625rem;color:var(--text-2);
+  max-width:54ch;line-height:1.65;
+}
+
+/* =========================================
+   NAVIGATION
+   ========================================= */
+nav{
+  position:fixed;
+  top:env(safe-area-inset-top,0px);
+  left:0;right:0;z-index:200;
+  background:var(--nav-bg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1100px;margin:0 auto;
+  padding-inline:24px;height:64px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:16px;
+}
+.nav-logo{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:1.125rem;color:var(--text);
+  flex-shrink:0;white-space:nowrap;
+}
+.nav-logo em{color:var(--accent);font-style:normal}
+.nav-links{
+  display:flex;align-items:center;
+  gap:4px;list-style:none;margin:0;padding:0;
+}
+.nav-links a{
+  font-size:.875rem;font-weight:500;
+  color:var(--text-2);padding:6px 11px;
+  border-radius:var(--r-sm);
+  transition:color .18s,background .18s;
+}
+.nav-links a:hover{color:var(--text);background:var(--surface-2)}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+
+/* Theme toggle */
+.theme-btn{
+  display:flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:var(--r-sm);
+  background:var(--surface-2);border:1px solid var(--border);
+  cursor:pointer;transition:background .18s,border-color .18s;
+  color:var(--text-2);flex-shrink:0;
+}
+.theme-btn:hover{background:var(--accent-bg);border-color:var(--accent-bd);color:var(--accent)}
+.theme-btn svg{width:17px;height:17px;fill:currentColor}
+.icon-sun{display:block}
+.icon-moon{display:none}
+[data-theme="dark"] .icon-sun,[data-theme="dark"] .icon-moon{display:block;display:none}
+/* handled via JS class */
+.dark-active .icon-sun{display:none}
+.dark-active .icon-moon{display:block}
+
+.nav-hire{
+  background:var(--accent);color:#fff!important;
+  padding:8px 20px;border-radius:var(--r-pill);
+  font-size:.875rem;font-weight:600;
+  transition:background .18s,transform .15s,box-shadow .18s;
+  box-shadow:0 2px 8px var(--accent-glow);
+}
+.nav-hire:hover{background:var(--accent-h)!important;transform:translateY(-1px);box-shadow:0 4px 16px var(--accent-glow)}
+
+.hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  flex-direction:column;gap:5px;padding:6px;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px;transition:transform .2s,opacity .2s}
+
+@media(max-width:780px){
+  .hamburger{display:flex}
+  .nav-links{
+    display:none;position:fixed;
+    top:calc(64px + env(safe-area-inset-top,0px));
+    left:0;right:0;
+    background:var(--nav-bg);
+    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--border);
+    flex-direction:column;padding:16px 24px 24px;
+    gap:4px;align-items:flex-start;
+  }
+  .nav-links.open{display:flex}
+  .nav-links a{width:100%;padding:12px 10px;font-size:1rem}
+  .nav-hire{display:none}
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+.hero{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  overflow:hidden;
+  padding-top:64px;
+  background:var(--bg);
+}
+#hero-canvas{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  pointer-events:none;opacity:.7;
+}
+.hero-content{
+  position:relative;z-index:1;
+  padding-block:88px 72px;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent-bg);border:1px solid var(--accent-bd);
+  border-radius:var(--r-pill);padding:6px 16px;
+  margin-bottom:28px;
+}
+.badge-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--accent);
+  animation:blink 2.4s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.badge-txt{
+  font-family:'Space Grotesk',sans-serif;font-size:.8rem;
+  font-weight:700;color:var(--accent);letter-spacing:.05em;
+}
+.hero-name{
+  font-size:clamp(3.2rem,8.5vw,6rem);
+  font-weight:700;line-height:1.1;
+  letter-spacing:-0.025em;
+  margin-bottom:22px;
+  color:var(--text);
+}
+.hero-name span{
+  display:block;
+  background:linear-gradient(130deg,var(--accent) 0%,#22d3d3 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-tagline{
+  font-size:clamp(.9375rem,2vw,1.1875rem);
+  color:var(--text-2);max-width:52ch;
+  margin-bottom:40px;line-height:1.7;
+}
+.hero-ctas{
+  display:flex;gap:14px;flex-wrap:wrap;margin-bottom:72px;
+}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#fff;
+  padding:14px 30px;border-radius:var(--r-pill);
+  font-weight:600;font-size:.95rem;
+  transition:background .18s,transform .15s,box-shadow .18s;
+  box-shadow:0 4px 14px var(--accent-glow);
+}
+.btn-primary:hover{background:var(--accent-h);color:#fff;transform:translateY(-2px);box-shadow:0 6px 22px var(--accent-glow)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface);color:var(--text);
+  padding:14px 30px;border-radius:var(--r-pill);
+  font-weight:600;font-size:.95rem;
+  border:1px solid var(--border);
+  transition:background .18s,transform .15s,border-color .18s;
+}
+.btn-secondary:hover{background:var(--surface-2);color:var(--text);transform:translateY(-2px);border-color:var(--accent)}
+
+.hero-stats{
+  display:flex;gap:48px;flex-wrap:wrap;
+}
+.stat-num{
+  font-family:'Space Grotesk',sans-serif;font-size:2rem;
+  font-weight:700;color:var(--text);line-height:1;
+}
+.stat-num.a1{color:var(--accent)}
+.stat-num.a2{color:var(--accent-2)}
+.stat-label{font-size:.8rem;color:var(--text-3);font-weight:500;margin-top:3px;letter-spacing:.02em}
+
+@media(max-width:600px){
+  .hero-stats{gap:28px}
+  .hero-ctas{flex-direction:column}
+  .btn-primary,.btn-secondary{justify-content:center}
+}
+
+/* =========================================
+   ABOUT
+   ========================================= */
+#about{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.about-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:72px;align-items:start;
+}
+.about-text p+p{margin-top:14px}
+.highlights{display:flex;flex-direction:column;gap:22px;margin-top:36px}
+.hl{display:flex;gap:14px;align-items:flex-start}
+.hl-icon{
+  width:38px;height:38px;border-radius:9px;
+  background:var(--accent-bg);border:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-top:2px;
+}
+.hl-body strong{display:block;color:var(--text);font-weight:600;margin-bottom:3px}
+.hl-body{font-size:.9375rem;color:var(--text-2);line-height:1.6}
+
+.stat-cards{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.stat-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:22px 20px;
+  display:flex;flex-direction:column;gap:4px;
+  box-shadow:var(--sh-sm);
+  transition:box-shadow .2s,transform .2s;
+}
+.stat-card:hover{box-shadow:var(--sh-md);transform:translateY(-2px)}
+.stat-card-icon{font-size:1.5rem;margin-bottom:6px}
+.stat-card-val{
+  font-family:'Space Grotesk',sans-serif;font-size:1.625rem;
+  font-weight:700;color:var(--text);line-height:1;
+}
+.stat-card-lbl{font-size:.8rem;color:var(--text-3);font-weight:500}
+
+@media(max-width:820px){.about-grid{grid-template-columns:1fr;gap:48px}}
+@media(max-width:420px){.stat-cards{grid-template-columns:1fr}}
+
+/* =========================================
+   SERVICES
+   ========================================= */
+.services-header{margin-bottom:48px}
+.services-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.svc-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:28px;
+  position:relative;overflow:hidden;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.svc-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));
+  opacity:0;transition:opacity .2s;
+}
+.svc-card:hover{border-color:var(--accent-bd);box-shadow:var(--sh-md);transform:translateY(-4px)}
+.svc-card:hover::after{opacity:1}
+
+.svc-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:var(--accent-bg);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:18px;
+}
+.svc-title{
+  font-family:'Space Grotesk',sans-serif;font-size:1.0625rem;
+  font-weight:700;color:var(--text);margin-bottom:10px;
+}
+.svc-desc{font-size:.875rem;color:var(--text-2);line-height:1.65;margin-bottom:18px}
+.tags{display:flex;flex-wrap:wrap;gap:7px}
+.tag{
+  font-size:.75rem;font-weight:500;
+  background:var(--surface-2);color:var(--text-2);
+  padding:3px 10px;border-radius:var(--r-pill);
+  border:1px solid var(--border);white-space:nowrap;
+}
+.tag.a{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-bd)}
+.tag.a2{background:var(--accent-2-bg);color:var(--accent-2);border-color:rgba(217,114,32,.25)}
+
+@media(max-width:900px){.services-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.services-grid{grid-template-columns:1fr}}
+
+/* =========================================
+   SKILLS
+   ========================================= */
+#skills{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.skills-groups{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:24px;margin-top:48px;
+}
+.skill-group{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:24px;
+}
+.sg-title{
+  font-family:'Space Grotesk',sans-serif;font-size:.8rem;
+  font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:14px;
+}
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px}
+.sk{
+  font-size:.8125rem;font-weight:500;
+  background:var(--surface);color:var(--text);
+  padding:5px 13px;border-radius:var(--r-pill);
+  border:1px solid var(--border);
+  transition:border-color .18s,color .18s,background .18s;
+  cursor:default;white-space:nowrap;
+}
+.sk:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+.sk.f{background:var(--accent-bg);color:var(--accent);border-color:var(--accent-bd)}
+
+@media(max-width:680px){.skills-groups{grid-template-columns:1fr}}
+
+/* =========================================
+   EXPERIENCE
+   ========================================= */
+.timeline{margin-top:56px;position:relative}
+.timeline::before{
+  content:'';position:absolute;
+  left:11px;top:8px;bottom:0;
+  width:1px;background:var(--border);
+}
+.tl-item{
+  display:flex;gap:28px;
+  padding-left:48px;position:relative;
+  padding-bottom:48px;
+}
+.tl-item:last-child{padding-bottom:0}
+.tl-dot{
+  position:absolute;left:3px;top:7px;
+  width:18px;height:18px;border-radius:50%;
+  background:var(--surface);border:2px solid var(--accent);
+  flex-shrink:0;
+}
+.tl-dot.now{background:var(--accent);box-shadow:0 0 0 4px var(--accent-bg)}
+.tl-date{
+  font-family:'Space Grotesk',sans-serif;font-size:.8rem;
+  font-weight:600;color:var(--text-3);
+  padding-top:5px;white-space:nowrap;
+  min-width:160px;flex-shrink:0;
+}
+.tl-body{flex:1}
+.tl-company{
+  font-family:'Space Grotesk',sans-serif;font-size:1.125rem;
+  font-weight:700;color:var(--text);margin-bottom:2px;padding-bottom:4px;
+}
+.tl-role{font-size:.875rem;font-weight:600;color:var(--accent);margin-bottom:10px}
+.tl-desc{font-size:.875rem;color:var(--text-2);line-height:1.65;margin-bottom:12px}
+
+@media(max-width:620px){
+  .timeline::before{left:7px}
+  .tl-item{padding-left:30px;gap:0;padding-bottom:36px}
+  .tl-dot{left:0;width:14px;height:14px}
+  .tl-date{display:none}
+}
+
+/* =========================================
+   PROJECTS
+   ========================================= */
+#projects{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+.projects-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:24px;margin-top:48px;
+}
+.proj-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:32px;
+  transition:border-color .2s,box-shadow .2s,transform .2s;
+}
+.proj-card:hover{border-color:var(--accent-bd);box-shadow:var(--sh-md);transform:translateY(-3px)}
+.proj-cat{
+  font-family:'Space Grotesk',sans-serif;font-size:.75rem;
+  font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--accent);margin-bottom:12px;
+}
+.proj-title{
+  font-family:'Space Grotesk',sans-serif;font-size:1.25rem;
+  font-weight:700;color:var(--text);
+  margin-bottom:12px;line-height:1.3;
+}
+.proj-desc{font-size:.875rem;color:var(--text-2);line-height:1.7;margin-bottom:18px}
+.proj-bullets{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.proj-bullet{
+  font-size:.8125rem;color:var(--text-2);
+  line-height:1.5;padding-left:18px;position:relative;
+}
+.proj-bullet::before{
+  content:'→';position:absolute;left:0;
+  color:var(--accent);font-weight:700;font-size:.75rem;top:1px;
+}
+.perf-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--accent-bg);border:1px solid var(--accent-bd);
+  border-radius:var(--r-pill);padding:5px 12px;
+  font-family:'Space Grotesk',sans-serif;font-size:.75rem;
+  font-weight:700;color:var(--accent);margin-bottom:16px;
+}
+
+@media(max-width:680px){.projects-grid{grid-template-columns:1fr}}
+
+/* =========================================
+   CONTACT
+   ========================================= */
+#contact{background:var(--bg)}
+.contact-wrap{max-width:620px;margin:0 auto;text-align:center}
+.contact-wrap .section-h{margin-bottom:12px}
+.contact-wrap .section-sub{margin:0 auto 8px}
+.contact-email-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r);padding:16px 20px;
+  margin:36px auto 0;
+  transition:border-color .2s,box-shadow .2s;
+}
+.contact-email-row:hover{border-color:var(--accent-bd);box-shadow:var(--sh-sm)}
+.contact-addr{
+  font-family:'Space Grotesk',sans-serif;font-weight:600;
+  font-size:.9375rem;color:var(--text);
+  word-break:break-all;text-align:left;
+}
+.copy-btn{
+  background:var(--accent-bg);border:1px solid var(--accent-bd);
+  border-radius:var(--r-sm);padding:7px 14px;
+  font-size:.8rem;font-weight:700;
+  color:var(--accent);cursor:pointer;
+  white-space:nowrap;flex-shrink:0;
+  transition:background .18s,color .18s,border-color .18s;
+  font-family:'Figtree',sans-serif;
+}
+.copy-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.copy-note{
+  font-size:.8125rem;color:var(--text-3);
+  margin-top:14px;min-height:1.5em;
+}
+.contact-links{
+  display:flex;justify-content:center;gap:14px;
+  margin-top:36px;flex-wrap:wrap;
+}
+.contact-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-pill);padding:10px 20px;
+  font-size:.875rem;font-weight:500;color:var(--text-2);
+  transition:border-color .2s,color .2s,background .2s;
+}
+.contact-pill:hover{border-color:var(--accent-bd);color:var(--accent);background:var(--accent-bg)}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+footer{
+  background:var(--bg-2);
+  border-top:1px solid var(--border);
+  padding-block:28px;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;padding-inline:24px;
+  display:flex;justify-content:space-between;
+  align-items:center;gap:14px;flex-wrap:wrap;
+}
+.footer-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;color:var(--text);font-size:.9375rem}
+.footer-logo em{color:var(--accent);font-style:normal}
+.footer-copy{font-size:.8125rem;color:var(--text-3)}
+
+/* =========================================
+   SCROLL-IN ANIMATIONS
+   ========================================= */
+.si{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.si.in{opacity:1;transform:translateY(0)}
+.si.d1{transition-delay:.08s}
+.si.d2{transition-delay:.16s}
+.si.d3{transition-delay:.24s}
+.si.d4{transition-delay:.32s}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">BS<em>.</em></div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.929zm13.021 13.021l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-13.021l-1.414-1.414L16.95 5.636l1.414 1.414 2.293-2.121zM5.636 16.95L4.222 18.364l-2.121-2.121 1.414-1.414L5.636 16.95zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+      </button>
+      <a href="#contact" class="nav-hire">Hire Me</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="badge-dot"></div>
+        <span class="badge-txt">Available for Contract &amp; Full-Time</span>
+      </div>
+      <h1 class="hero-name">
+        Bhupinder<br>
+        <span>Singh</span>
+      </h1>
+      <p class="hero-tagline">
+        AI Engineer with 12+ years building production-grade RAG systems, knowledge graphs, and agentic AI workflows — and replacing the legacy tools teams have been patching for a decade.
+      </p>
+      <div class="hero-ctas">
+        <a href="#services" class="btn-primary">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M7.5 1L14 7.5L7.5 14M14 7.5H1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Explore Services
+        </a>
+        <a href="#contact" class="btn-secondary">
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M13 9.5C13 9.76 12.9 10.01 12.71 10.21C12.51 10.4 12.26 10.5 12 10.5H4L1.5 13V2.5C1.5 2.24 1.6 1.99 1.79 1.79C1.99 1.6 2.24 1.5 2.5 1.5H12C12.26 1.5 12.51 1.6 12.71 1.79C12.9 1.99 13 2.24 13 2.5V9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Get in Touch
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num a1">12+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num a1">RAG</div>
+          <div class="stat-label">AI Specialist</div>
+        </div>
+        <div>
+          <div class="stat-num a1">4</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div>
+          <div class="stat-num a2">Fintech</div>
+          <div class="stat-label">Domain Expertise</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-eyebrow">About Me</div>
+        <h2 class="section-h">Engineer, Architect,<br>Problem Solver</h2>
+        <p class="section-sub">I started in frontend development at Infosys in 2015 and spent the past decade moving up the stack — APIs and microservices at Electronics for Imaging, senior backend work at EPAM, to architecting full AI systems today.</p>
+        <p class="section-sub">I specialize in production AI: systems that answer questions accurately, automate workflows reliably, and get shipped. I also help small businesses replace the Access databases and Excel workbooks they've been meaning to modernize for years.</p>
+        <div class="highlights">
+          <div class="hl">
+            <div class="hl-icon">🧠</div>
+            <div class="hl-body"><strong>AI-First Engineering</strong>RAG pipelines, knowledge graphs, and multi-agent systems deployed in production — not just in notebooks.</div>
+          </div>
+          <div class="hl">
+            <div class="hl-icon">⚙️</div>
+            <div class="hl-body"><strong>Full-Stack Capability</strong>NestJS/Node.js backends, React frontends, AWS infrastructure, MongoDB and SQL databases end-to-end.</div>
+          </div>
+          <div class="hl">
+            <div class="hl-icon">🏗️</div>
+            <div class="hl-body"><strong>Performance-Obsessed</strong>Sub-200ms latency on knowledge graph queries, in-memory optimization, and production-grade observability.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="stat-cards">
+          <div class="stat-card si">
+            <div class="stat-card-icon">🗓️</div>
+            <div class="stat-card-val">12+</div>
+            <div class="stat-card-lbl">Years in Software</div>
+          </div>
+          <div class="stat-card si d1">
+            <div class="stat-card-icon">🤖</div>
+            <div class="stat-card-val">AI</div>
+            <div class="stat-card-lbl">Engineer @ EPAM</div>
+          </div>
+          <div class="stat-card si d2">
+            <div class="stat-card-icon">📍</div>
+            <div class="stat-card-val">AB</div>
+            <div class="stat-card-lbl">Edmonton, Alberta</div>
+          </div>
+          <div class="stat-card si d3">
+            <div class="stat-card-icon">🎓</div>
+            <div class="stat-card-val">B.Tech</div>
+            <div class="stat-card-lbl">+ Diploma, Conestoga</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-eyebrow">What I Build</div>
+      <h2 class="section-h">Services</h2>
+      <p class="section-sub">From AI transformation to replacing the spreadsheet your team has been patching for a decade. Fixed-price engagements available for legacy modernization.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card si">
+        <div class="svc-icon">⚡</div>
+        <div class="svc-title">AI Integration &amp; Transformation</div>
+        <p class="svc-desc">Connect LLMs to your existing systems. Architecture, prompt engineering, and production pipelines — from first prototype to live deployment. I evaluate local vs. API models for latency and cost.</p>
+        <div class="tags">
+          <span class="tag a">LLM Integration</span>
+          <span class="tag">RAG Pipelines</span>
+          <span class="tag">Prompt Engineering</span>
+          <span class="tag">Semantic Search</span>
+        </div>
+      </div>
+      <div class="svc-card si d1">
+        <div class="svc-icon">🕸️</div>
+        <div class="svc-title">Agentic AI &amp; Automation</div>
+        <p class="svc-desc">Multi-agent workflows that reason, branch, and recover from failure. I've shipped production agentic frameworks handling financial operations across 5–10 concurrent autonomous agents.</p>
+        <div class="tags">
+          <span class="tag a">LangGraph</span>
+          <span class="tag">Multi-Agent Systems</span>
+          <span class="tag">Tool Calling</span>
+          <span class="tag">Workflow Orchestration</span>
+        </div>
+      </div>
+      <div class="svc-card si d2">
+        <div class="svc-icon">🔍</div>
+        <div class="svc-title">RAG &amp; Knowledge Systems</div>
+        <p class="svc-desc">Sub-200ms question answering over your domain data. Vector databases, knowledge graphs, ontology design, and in-memory caching — tuned for accuracy, speed, and guardrail safety.</p>
+        <div class="tags">
+          <span class="tag a">Knowledge Graphs</span>
+          <span class="tag">Vector Databases</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Ontology Design</span>
+        </div>
+      </div>
+      <div class="svc-card si">
+        <div class="svc-icon">🏭</div>
+        <div class="svc-title">Legacy System Modernization</div>
+        <p class="svc-desc">Your Access database and Excel workbooks work — until they don't. I replace them with simple web apps the whole team can use, delivered at a fixed price with no surprises.</p>
+        <div class="tags">
+          <span class="tag a2">Fixed-Price</span>
+          <span class="tag">Web Apps</span>
+          <span class="tag">Data Migration</span>
+          <span class="tag">$10k–40k range</span>
+        </div>
+      </div>
+      <div class="svc-card si d1">
+        <div class="svc-icon">🔗</div>
+        <div class="svc-title">Backend &amp; API Engineering</div>
+        <p class="svc-desc">High-performance Node.js and NestJS services, REST and GraphQL APIs, database query optimization, and AWS infrastructure — built for real production load.</p>
+        <div class="tags">
+          <span class="tag a">Node.js / NestJS</span>
+          <span class="tag">GraphQL</span>
+          <span class="tag">MongoDB / SQL</span>
+          <span class="tag">AWS</span>
+        </div>
+      </div>
+      <div class="svc-card si d2">
+        <div class="svc-icon">🗺️</div>
+        <div class="svc-title">Architecture &amp; Consulting</div>
+        <p class="svc-desc">System design reviews, performance audits, and technical strategy. I mentor engineering teams on RAG patterns, agent orchestration, vector database best practices, and production AI deployment.</p>
+        <div class="tags">
+          <span class="tag a">System Design</span>
+          <span class="tag">Performance Audit</span>
+          <span class="tag">Mentorship</span>
+          <span class="tag">Code Review</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills">
+  <div class="container">
+    <div class="section-eyebrow">Technical Stack</div>
+    <h2 class="section-h">Skills &amp; Technologies</h2>
+    <p class="section-sub">Twelve years of stack evolution — from frontend JavaScript to production AI systems at scale.</p>
+    <div class="skills-groups">
+      <div class="skill-group si">
+        <div class="sg-title">AI / ML</div>
+        <div class="skill-tags">
+          <span class="sk f">RAG</span>
+          <span class="sk f">LLMs</span>
+          <span class="sk f">Knowledge Graphs</span>
+          <span class="sk f">Vector Databases</span>
+          <span class="sk">Semantic Search</span>
+          <span class="sk">Embeddings</span>
+          <span class="sk">Intent Classification</span>
+          <span class="sk">Ontology Design</span>
+          <span class="sk">Guardrails</span>
+          <span class="sk">Local LLMs</span>
+          <span class="sk">Prompt Engineering</span>
+          <span class="sk">In-Memory Caching</span>
+        </div>
+      </div>
+      <div class="skill-group si d1">
+        <div class="sg-title">Agentic AI</div>
+        <div class="skill-tags">
+          <span class="sk f">LangGraph</span>
+          <span class="sk f">Multi-Agent Systems</span>
+          <span class="sk">Agent Orchestration</span>
+          <span class="sk">Tool Calling</span>
+          <span class="sk">Function Calling</span>
+          <span class="sk">Workflow Orchestration</span>
+          <span class="sk">State Management</span>
+          <span class="sk">Multi-Step Reasoning</span>
+          <span class="sk">Agent Design Patterns</span>
+        </div>
+      </div>
+      <div class="skill-group si d2">
+        <div class="sg-title">Backend &amp; Data</div>
+        <div class="skill-tags">
+          <span class="sk f">Node.js</span>
+          <span class="sk f">NestJS</span>
+          <span class="sk">REST APIs</span>
+          <span class="sk">GraphQL</span>
+          <span class="sk">MongoDB</span>
+          <span class="sk">SQL</span>
+          <span class="sk">AWS</span>
+          <span class="sk">Query Optimization</span>
+          <span class="sk">Microservices</span>
+          <span class="sk">Data Pipelines</span>
+        </div>
+      </div>
+      <div class="skill-group si d3">
+        <div class="sg-title">Frontend &amp; Practices</div>
+        <div class="skill-tags">
+          <span class="sk">React.js</span>
+          <span class="sk">TypeScript</span>
+          <span class="sk">JavaScript</span>
+          <span class="sk">System Design</span>
+          <span class="sk">CI/CD</span>
+          <span class="sk">Agile</span>
+          <span class="sk">Code Review</span>
+          <span class="sk">Mentorship</span>
+          <span class="sk">Performance Tuning</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<section id="experience">
+  <div class="container">
+    <div class="section-eyebrow">Career</div>
+    <h2 class="section-h">Experience</h2>
+    <p class="section-sub">From Systems Engineer to AI Engineer — a decade of moving up the stack.</p>
+    <div class="timeline">
+
+      <div class="tl-item si">
+        <div class="tl-dot now"></div>
+        <div class="tl-date">Mid 2024 — Present</div>
+        <div class="tl-body">
+          <div class="tl-company">EPAM Systems</div>
+          <div class="tl-role">AI Engineer</div>
+          <p class="tl-desc">Architecting production AI systems. Built a real-time sports Q&amp;A bot using RAG and in-memory knowledge graphs achieving sub-200ms latency, and a client-facing multi-agent portfolio management framework using LangGraph supporting 5–10 concurrent autonomous agents for a fintech client. Mentored engineers on RAG systems architecture and agent orchestration patterns.</p>
+          <div class="tags">
+            <span class="tag a">RAG</span><span class="tag a">LangGraph</span>
+            <span class="tag">Knowledge Graphs</span><span class="tag">Multi-Agent</span>
+            <span class="tag">NestJS</span><span class="tag">Vector DB</span><span class="tag">AWS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item si d1">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jan 2022 — Mid 2024</div>
+        <div class="tl-body">
+          <div class="tl-company">EPAM Systems</div>
+          <div class="tl-role">Senior Software Engineer</div>
+          <p class="tl-desc">High-performance web applications and backend services. Optimized application speed and scalability, implemented security measures, integrated third-party APIs, and mentored junior developers on software architecture best practices.</p>
+          <div class="tags">
+            <span class="tag">React.js</span><span class="tag">Node.js</span>
+            <span class="tag">REST APIs</span><span class="tag">AWS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item si d2">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Apr 2017 — Dec 2021</div>
+        <div class="tl-body">
+          <div class="tl-company">Electronics for Imaging</div>
+          <div class="tl-role">Senior Software Engineer</div>
+          <p class="tl-desc">Led feature development cycles across a large enterprise product. Built and maintained RESTful APIs for microservices integrations, optimized backend query performance, and mentored junior engineers in agile CI/CD environments.</p>
+          <div class="tags">
+            <span class="tag">Node.js</span><span class="tag">Microservices</span>
+            <span class="tag">SQL</span><span class="tag">MongoDB</span><span class="tag">REST APIs</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item si d3">
+        <div class="tl-dot"></div>
+        <div class="tl-date">Jan 2015 — Mar 2017</div>
+        <div class="tl-body">
+          <div class="tl-company">Infosys</div>
+          <div class="tl-role">Systems Engineer</div>
+          <p class="tl-desc">Designed and implemented responsive single-page application UIs, developed proof-of-concept projects for evolving requirements, executed unit and integration testing, and collaborated on beta and production releases.</p>
+          <div class="tags">
+            <span class="tag">JavaScript</span><span class="tag">SPA Architecture</span>
+            <span class="tag">QA / Testing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects">
+  <div class="container">
+    <div class="section-eyebrow">Featured Work</div>
+    <h2 class="section-h">Projects</h2>
+    <p class="section-sub">Production systems built at EPAM — both running in live client environments.</p>
+    <div class="projects-grid">
+      <div class="proj-card si">
+        <div class="proj-cat">RAG · Knowledge Graphs · AI</div>
+        <h3 class="proj-title">Real-Time Sports Q&amp;A Bot</h3>
+        <div class="perf-badge">⚡ Sub-200ms response latency</div>
+        <p class="proj-desc">Natural-language question answering over live sports data — scores, events, player statistics — with consistent sub-200ms response times on in-memory graph queries.</p>
+        <div class="proj-bullets">
+          <div class="proj-bullet">Architected RAG pipeline with vector DB semantic search over a sports domain ontology</div>
+          <div class="proj-bullet">Transitioned from GraphQL-based external queries to hourly-refreshed in-memory knowledge graph, eliminating redundant vector DB + LLM call chains</div>
+          <div class="proj-bullet">Integrated multiple LLMs for intent classification; evaluated local models to reduce external API dependency</div>
+          <div class="proj-bullet">Implemented guardrails, safety mechanisms and in-memory caching to maintain accuracy at scale</div>
+        </div>
+        <div class="tags">
+          <span class="tag a">RAG</span><span class="tag a">Knowledge Graph</span>
+          <span class="tag">Vector DB</span><span class="tag">Node.js</span><span class="tag">AWS</span>
+        </div>
+      </div>
+      <div class="proj-card si d2">
+        <div class="proj-cat">Agentic AI · Fintech · LangGraph</div>
+        <h3 class="proj-title">Portfolio Management Agentic Framework</h3>
+        <div class="perf-badge">🤖 5–10 concurrent autonomous agents</div>
+        <p class="proj-desc">Client-facing multi-agent orchestration framework for a financial client — handling portfolio rebalancing, risk assessment, and trade coordination through autonomous and semi-autonomous agents.</p>
+        <div class="proj-bullets">
+          <div class="proj-bullet">Designed scalable multi-agent architecture supporting 5–10 distinct agents for complex financial decision-making</div>
+          <div class="proj-bullet">Built tool-calling mechanisms for agents to interact with trading platforms, financial APIs, and risk management systems</div>
+          <div class="proj-bullet">Engineered LLM-based decision logic for conditional branching, uncertainty, and dynamic rebalancing</div>
+          <div class="proj-bullet">Developed monitoring and observability infrastructure for agent execution paths and performance metrics</div>
+        </div>
+        <div class="tags">
+          <span class="tag a">LangGraph</span><span class="tag a">Multi-Agent</span>
+          <span class="tag">NestJS</span><span class="tag">Tool Calling</span><span class="tag">Fintech</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-wrap">
+      <div class="section-eyebrow" style="text-align:center">Get in Touch</div>
+      <h2 class="section-h" style="text-align:center">Let's Build Something</h2>
+      <p class="section-sub" style="text-align:center">Whether you want to add AI to an existing system, build an agentic workflow, or replace a legacy tool your team has outgrown — I'd like to hear about it.</p>
+      <p class="section-sub" style="text-align:center;margin-top:8px">A 15-minute call is usually enough to know if it's a fit.</p>
+
+      <div class="contact-email-row">
+        <div class="contact-addr">mrbhupindersinghgne@gmail.com</div>
+        <button class="copy-btn" id="copy-btn" onclick="copyEmail()">Copy</button>
+      </div>
+      <p class="copy-note" id="copy-note">Click Copy to grab the email address.</p>
+
+      <div class="contact-links">
+        <span class="contact-pill">📍 Edmonton, Alberta</span>
+        <span class="contact-pill">🕐 MST (UTC−7)</span>
+        <span class="contact-pill">🌐 Open to Remote</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">BS<em>.</em> Bhupinder Singh</div>
+    <div class="footer-copy">AI Engineer · Edmonton, Alberta</div>
+    <div class="footer-copy">© 2026</div>
+  </div>
+</footer>
+
+<script>
+// ===== THEME =====
+(function(){
+  var root = document.documentElement;
+  var btn  = document.getElementById('theme-btn');
+  function isDark(){
+    return root.getAttribute('data-theme')==='dark' ||
+      (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme:dark)').matches);
+  }
+  function applyTheme(dark){
+    root.setAttribute('data-theme', dark ? 'dark' : 'light');
+    btn.classList.toggle('dark-active', dark);
+    try{ localStorage.setItem('theme', dark ? 'dark' : 'light'); }catch(e){}
+  }
+  // restore saved preference
+  try{
+    var saved = localStorage.getItem('theme');
+    if(saved==='dark'){ root.setAttribute('data-theme','dark'); btn.classList.add('dark-active'); }
+    else if(saved==='light'){ root.setAttribute('data-theme','light'); }
+    else{ btn.classList.toggle('dark-active', isDark()); }
+  }catch(e){ btn.classList.toggle('dark-active', isDark()); }
+
+  btn.addEventListener('click', function(){ applyTheme(!isDark()); });
+})();
+
+// ===== MOBILE NAV =====
+document.getElementById('hamburger').addEventListener('click', function(){
+  document.getElementById('nav-links').classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(function(a){
+  a.addEventListener('click', function(){
+    document.getElementById('nav-links').classList.remove('open');
+  });
+});
+
+// ===== COPY EMAIL =====
+function copyEmail(){
+  var email = 'mrbhupindersinghgne@gmail.com';
+  var btn = document.getElementById('copy-btn');
+  var note = document.getElementById('copy-note');
+  navigator.clipboard.writeText(email).then(function(){
+    btn.textContent = 'Copied!';
+    note.textContent = 'Email address copied to clipboard.';
+    setTimeout(function(){ btn.textContent = 'Copy'; note.textContent = 'Click Copy to grab the email address.'; }, 2500);
+  }).catch(function(){
+    var r = document.createRange();
+    r.selectNode(document.querySelector('.contact-addr'));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(r);
+    btn.textContent = 'Selected';
+    setTimeout(function(){ btn.textContent = 'Copy'; }, 2000);
+  });
+}
+
+// ===== SCROLL FADE-IN =====
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); }});
+  }, {threshold:0.1, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.si').forEach(function(el){ obs.observe(el); });
+})();
+
+// ===== HERO CANVAS (knowledge-graph network) =====
+(function(){
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  var canvas = document.getElementById('hero-canvas');
+  var ctx = canvas.getContext('2d');
+  var nodes = [], W, H, raf;
+  var N = 60, DIST = 170;
+
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function accentRGB(){
+    var root = document.documentElement;
+    var dark = root.getAttribute('data-theme')==='dark' ||
+      (!root.getAttribute('data-theme') && window.matchMedia('(prefers-color-scheme:dark)').matches);
+    return dark ? '24,186,186' : '13,115,119';
+  }
+
+  function init(){
+    nodes = [];
+    for(var i=0;i<N;i++){
+      nodes.push({
+        x: Math.random()*W, y: Math.random()*H,
+        vx:(Math.random()-.5)*.45, vy:(Math.random()-.5)*.45,
+        r: Math.random()*2+1
+      });
+    }
+  }
+
+  function frame(){
+    ctx.clearRect(0,0,W,H);
+    var c = accentRGB();
+    for(var i=0;i<nodes.length;i++){
+      var n=nodes[i];
+      n.x+=n.vx; n.y+=n.vy;
+      if(n.x<0||n.x>W) n.vx*=-1;
+      if(n.y<0||n.y>H) n.vy*=-1;
+      for(var j=i+1;j<nodes.length;j++){
+        var m=nodes[j];
+        var dx=n.x-m.x, dy=n.y-m.y;
+        var d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DIST){
+          ctx.strokeStyle='rgba('+c+','+((.28*(1-d/DIST)).toFixed(3))+')';
+          ctx.lineWidth=.9;
+          ctx.beginPath(); ctx.moveTo(n.x,n.y); ctx.lineTo(m.x,m.y); ctx.stroke();
+        }
+      }
+      ctx.fillStyle='rgba('+c+',.7)';
+      ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+    }
+    raf = requestAnimationFrame(frame);
+  }
+
+  resize(); init(); frame();
+  window.addEventListener('resize', function(){ resize(); });
+})();
+</script>
+</body>
+</html>
